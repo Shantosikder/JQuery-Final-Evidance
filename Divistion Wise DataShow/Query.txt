@@ -1,0 +1,33 @@
+CREATE TABLE `divisions` (
+ `id` int(11) NOT NULL auto_increment,
+`divName` varchar(64) NOT NULL,
+PRIMARY KEY (`id`)
+);
+
+###################################
+
+CREATE TABLE `districts` (
+`id` int(11) NOT NULL auto_increment,
+`divId` int(11) NOT NULL,
+`distName` varchar(64) NOT NULL,
+PRIMARY KEY (`id`)
+);
+
+#####################################
+
+CREATE TABLE `upazilas` (
+`id` int(11) NOT NULL auto_increment,
+`distId` int(11) NOT NULL,
+ `upzName` varchar(64) NOT NULL,
+PRIMARY KEY (`id`)
+);
+
+######################################
+
+
+CREATE TABLE `upazilainfo` (
+`id` int(11) NOT NULL auto_increment,
+`upzId` int(11) NOT NULL,
+`description` text NOT NULL,
+PRIMARY KEY (`id`)
+);

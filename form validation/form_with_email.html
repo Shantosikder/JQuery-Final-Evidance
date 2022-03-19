@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>form validation jquery</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<style>
+		.btn:hover{
+			pad
+			background-color: green;
+		}
+		.error{color: red;}
+		#info{color: red; font-weight: bold;}
+	</style>
+
+</head>
+<body>
+
+	    <script>
+        $(document).ready(function(){
+            $('#check').click(validate);
+            function validate(){
+                var dataValidate = true;
+                $('#info').html('');
+                $('.required').each(function(){
+                    $(this).next('span').remove();
+                    if($(this).val() == ''){
+                        
+                        $(this).after('<span class="error">Required field</span>');
+                        dataValidate = false;
+                    }
+                });
+
+               var pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+               var email =  $('#email').val();
+                if(!pattern.test(email)){
+                	$('#email').after('<span class="error"> email is invalid </sapn>');
+                	 dataValidate = false;
+                }
+               
+                $('.number').each(function(){
+                    $(this).next('span').remove();
+                    if($(this).val() == ''){
+                        $(this).after('<span class="error">You should must be number</span>');
+                        dataValidate = false;
+                    }
+                    else if(isNaN($(this).val())){
+                        $(this).after('<span class="error">You should must be number</span>');
+                        dataValidate = false;
+                    }
+                });
+
+                if(dataValidate){
+                    $('#info').text('All field validate');
+                    $('.error').text('');
+                }
+            }
+        });
+    </script>
+	
+	<h1>Contact Form::</h1>
+
+	<div id="info"></div>
+
+
+<form action="/action_page.php">
+<fieldset>
+
+	<legend>Personal:</legend>
+
+	<form>
+		<table>
+			<tr>
+			<td>
+				<label>Name:*</label>
+			</td>
+			<td>
+				<input type="text" class="required" placeholder="Name">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>Email:</label>
+			</td>
+			<td>
+				<input type="text" id="email" class="email" placeholder="Email">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>Address*:</label>
+			</td>
+			<td>
+				<input type="text" class="required" placeholder="Address">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>City*:</label>
+			</td>
+			<td>
+				<input type="text" class="required" placeholder="City" >
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>Country*:</label>
+			</td>
+			<td>
+				<input type="text" class="required" placeholder="Country">
+			</td>
+		</tr>
+
+		</table>
+	</form>	
+
+</fieldset>
+
+		
+ <fieldset>
+
+  <legend>Other Details:</legend>
+  <form>
+  	<table>
+  		<tr>
+  			<td>
+  				 <label>Age*:</label>
+  			</td>
+  			<td>
+  				 <input type="text" class="required number" placeholder="Age">
+  			</td>
+  		</tr>
+  		<tr>
+  			<td>
+  				 <label>Monthly Expenses*:</label>
+  			</td>
+  			<td>
+  				<input type="text" class="required number" placeholder="Monthly Expenses">
+  			</td>
+  		</tr>
+  	</table>
+  </form>
+
+  <input class="btn" type="button" id="check" value="CHECK">
+
+ </fieldset>
+
+</form>	
+
+</body>
+</html>

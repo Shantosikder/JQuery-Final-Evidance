@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>form validation jquery</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+	<style>
+		
+		.btn:hover{
+			background-color: green;
+			padding: 4px;
+			color: white;
+			border-radius: 5px;
+		}
+
+	</style>
+
+</head>
+<body>
+
+	<script>
+
+      $(document).ready(function(){
+      	$('input:text').bind('focus keyup',validate);
+      	var dataValidate = false;
+      	function validate(){
+      		var cur = $(this);
+      		cur.next('span').remove();
+      		if(cur.hasClass('required')){
+      			if(cur.val()==''){
+      				cur.after('<span class="error">Not Empty</span>');
+      				dataValidate = false;
+      				cur.data('valid',false);
+      			}else{
+      				dataValidate = true;
+      				cur.data('valid',true);
+      			}
+
+      		} //End if
+
+      		if(cur.hasClass('number')){
+      			if(isNaN(cur.val())){
+      				cur.after('<span class="error">Number Required</span>');
+      				dataValidate = false;
+      				cur.data('valid',false);
+      			} else{
+      				dataValidate = true;
+      				cur.data('valid',true);
+      			}
+
+      		} //End if
+
+      	} //End validate function
+
+      	$('#save').click(function(){
+      		$('.required').each(function(){
+      			var current = $(this);
+      			if(current.data('valid')!==true){
+      				dataValidate = false;
+      			}
+      		});
+
+      		$('.number').each(function(){
+      			var current = $(this);
+      			if(current.data('valid')!==true){
+      				dataValidate = false;
+      			}
+      		});
+      			if(dataValidate){
+      				$('#info').text('All data are validate');
+      			}else{
+      				$('#info').text('Error Try Again');
+      			}
+      		});
+      });
+
+    </script>
+	
+	<div id="info"></div>
+
+	<h2>Personal Details Form:</h2>
+
+<form>
+
+<fieldset>
+
+	<legend>Personal:</legend>
+
+	<form action="process.php">
+		<table>
+			<tr>
+			<td>
+				<label>Name:*</label>
+			</td>
+			<td>
+				<input type="text" class="required" placeholder="Name">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>Address*:</label>
+			</td>
+			<td>
+				<input type="text" class="required" placeholder="Address">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label>Country*:</label>
+			</td>
+			<td>
+				<input type="text" class="required" placeholder="Country">
+			</td>
+		</tr>
+
+		</table>
+	</form>	
+
+</fieldset>
+
+		
+ <fieldset>
+
+  <legend>Other Details:</legend>
+  <form>
+  	<table>
+  		<tr>
+  			<td>
+  				 <label>Age*:</label>
+  			</td>
+  			<td>
+  				 <input type="text" class="required number" placeholder="Age">
+  			</td>
+  		</tr>
+  		<tr>
+  			<td>
+  				 <label>Monthly Expenses*:</label>
+  			</td>
+  			<td>
+  				<input type="text" class="required number" placeholder="Monthly Expenses">
+  			</td>
+  		</tr>
+  	</table>
+  </form>
+
+  <input class="btn" type="button" id="save" value="SAVE">
+
+ </fieldset>
+
+</form>	
+
+</body>
+</html>
